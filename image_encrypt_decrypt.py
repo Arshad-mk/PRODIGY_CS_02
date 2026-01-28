@@ -32,5 +32,55 @@ def encrypt_decrypt_image(input_path, output_path, key, mode):
             r, g, b = pixels[x, y]
 
             # Encrypt: Add key value
-            if mode
+            if mode == "E":
+                r = (r + key) % 256
+                g = (g + key) % 256
+                b = (b + key) % 256
 
+            # Decrypt: Subtract key value
+            elif mode == "D":
+                r = (r - key) % 256
+                g = (g - key) % 256
+                b = (b - key) % 256
+
+            # Update pixel value
+            pixels[x, y] = (r, g, b)
+
+    # Save the output image
+    img.save(output_path)
+    print("✅ Output saved as:", output_path)
+
+
+# ---------------- MAIN PROGRAM ---------------- #
+
+print("\n--- Image Encryption & Decryption Tool (Task 2) ---")
+
+# Select image file
+print("📌 Please select an image file...")
+input_file = select_image()
+
+if not input_file:
+    print("❌ No file selected. Exiting program.")
+    exit()
+
+print("✅ Selected File:", input_file)
+
+# Input key
+key = int(input("Enter secret key (1–255): "))
+
+# Validate key range
+if key < 1 or key > 255:
+    print("❌ Invalid key! Key must be between 1 and 255.")
+    exit()
+
+# Encryption or Decryption choice
+choice = input("Type E for Encrypt or D for Decrypt: ").upper()
+
+if choice == "E":
+    encrypt_decrypt_image(input_file, "encrypted.png", key, "E")
+
+elif choice == "D":
+    encrypt_decrypt_image(input_file, "decrypted.png", key, "D")
+
+else:
+    print("❌ Invalid choice! Please enter E or D.")
