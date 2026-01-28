@@ -43,7 +43,8 @@ def encrypt_decrypt_image(input_path, output_path, key, mode):
 
 # ---------------- MAIN PROGRAM ---------------- #
 
-print("\n--- Image Encryption Tool (Task 2) ---")
+print("\n--- Image Encryption & Decryption Tool (Task 2) ---")
+
 
 print("📌 Select an image file...")
 input_file = select_image()
